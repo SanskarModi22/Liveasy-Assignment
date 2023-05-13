@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liveasy_assignment/views/mobile_screen.dart';
+import 'package:liveasy_assignment/views/otp_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: const MobileScreen(),
+      home: const OTPScreen(),
     );
   }
 }
