@@ -20,18 +20,16 @@ class CustomDropdownButtonFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField2(
-      // Move the rest of the properties from the original widget here
       decoration: InputDecoration(
         isDense: true,
         contentPadding: EdgeInsets.zero,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(0),
         ),
       ),
       isExpanded: true,
-
       hint: const Text(
-        'Select Your Gender',
+        'Select Your Language',
         style: TextStyle(fontSize: 14),
       ),
       items: items
@@ -50,7 +48,7 @@ class CustomDropdownButtonFormField extends StatelessWidget {
       onSaved: onSaved,
       buttonStyleData: const ButtonStyleData(
         height: 60,
-        padding: EdgeInsets.only(left: 20, right: 10),
+        padding: EdgeInsets.only(left: 5, right: 5),
       ),
       iconStyleData: const IconStyleData(
         icon: Icon(
@@ -58,11 +56,6 @@ class CustomDropdownButtonFormField extends StatelessWidget {
           color: Colors.black45,
         ),
         iconSize: 30,
-      ),
-      dropdownStyleData: DropdownStyleData(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-        ),
       ),
     );
   }

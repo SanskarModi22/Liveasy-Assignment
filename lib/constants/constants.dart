@@ -27,4 +27,5 @@ class Constants {
 
   static const Color black = Color(0xFF000000);
   static const Color grey = Color(0xFF6A6C7B);
+  static const Color blue = Color(0xFF2E3B62);
 }

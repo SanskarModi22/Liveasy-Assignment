@@ -25,37 +25,96 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height: Constants.screenHeight(context) / 4.5,
+            ),
             Image.asset(
               Constants.galleryImg,
+              width: 90,
+              height: 60,
             ),
-            const CustomText(
-              text: 'Please select your Language',
-              fontSize: 20,
-              bold: true,
+            const SizedBox(
+              height: 30,
             ),
-            SizedBox(
-              width: Constants.screenWidth(context) / 2,
-              child: const CustomText(
-                text: 'You can change language at any time',
-                color: Constants.grey,
-                fontSize: 14,
+            const Padding(
+              padding: EdgeInsets.only(
+                bottom: 10,
+              ),
+              child: CustomText(
+                text: 'Please select your Language',
+                fontSize: 20,
+                bold: true,
               ),
             ),
-            CustomDropdownButtonFormField(
-              items: genderItems,
-              selectedValue: selectedValue,
-              onChanged: (value) {
-                // Do something when changing the item if you want.
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 20,
+              ),
+              child: SizedBox(
+                width: Constants.screenWidth(context) / 2,
+                child: const CustomText(
+                  text: 'You can change language at any time',
+                  color: Constants.grey,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 20,
+              ),
+              child: SizedBox(
+                width: Constants.screenWidth(context) / 1.5,
+                child: CustomDropdownButtonFormField(
+                  items: genderItems,
+                  selectedValue: selectedValue,
+                  onChanged: (value) {
+                    // Do something when changing the item if you want.
+                  },
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Please select gender.';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    selectedValue = value.toString();
+                  },
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Handle button press
               },
-              validator: (value) {
-                if (value == null) {
-                  return 'Please select gender.';
-                }
-                return null;
-              },
-              onSaved: (value) {
-                selectedValue = value.toString();
-              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Constants.blue, // Text color of the button
+                textStyle: const TextStyle(
+                  fontSize: 16,
+                ), // Text style of the button's label
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 110,
+                  vertical: 20,
+                ), // Padding around the button's label
+                shape: const RoundedRectangleBorder(
+                    // Border radius of the button
+                    ),
+              ),
+              child: const CustomText(
+                text: 'NEXT',
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            Image.asset(
+              Constants.page1Vector,
+              width: Constants.screenWidth(
+                  context), // Replace with your image path
+              fit: BoxFit.cover, // Adjust the BoxFit based on your needs
             ),
           ],
         ),
