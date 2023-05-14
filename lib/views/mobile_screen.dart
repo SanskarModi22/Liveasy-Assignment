@@ -134,13 +134,18 @@ class _MobileScreenState extends State<MobileScreen> {
             ),
           ),
           ElevatedButton(
-            onPressed: () async {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>
-                      OTPScreen(phoneNo: mobileController.text),
-                ),
-              );
+            onPressed: () {
+              if (mobileController.text != '') {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        OTPScreen(phoneNo: mobileController.text),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Please Write Mobile Number')));
+              }
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
