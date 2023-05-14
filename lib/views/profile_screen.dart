@@ -39,45 +39,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Center(
                   child: Container(
                     width: Constants.screenWidth(context) / 1.1,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                         border: Border.all(
                       width: 2,
                       color: Colors.black,
                     )),
-                    child: ListTile(
-                      title: Row(
+                    child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image.asset(Constants.shipperImg),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              CustomText(
-                                text: 'Shipper',
-                                bold: true,
+                          Radio<Gender>(
+                            value: Gender.male,
+                            groupValue: selectedGender,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedGender = value;
+                              });
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset(Constants.shipperImg),
+                              const SizedBox(
+                                width: 20,
                               ),
-                              SizedBox(
-                                width: 200,
-                                child: CustomText(
-                                  text:
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  CustomText(
+                                    text: 'Shipper',
+                                    bold: true,
+                                    fontSize: 18,
+                                  ),
+                                  SizedBox(
+                                    width: 200,
+                                    child: CustomText(
+                                      fontSize: 14,
+                                      text:
+                                          'Lorem ipsum dolor sit amet, consectetur adipiscing',
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                      leading: Radio<Gender>(
-                        value: Gender.male,
-                        groupValue: selectedGender,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedGender = value;
-                          });
-                        },
-                      ),
-                    ),
+                          ),
+                        ]),
                   ),
                 ),
                 const SizedBox(
@@ -86,45 +94,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Center(
                   child: Container(
                     width: Constants.screenWidth(context) / 1.1,
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                         border: Border.all(
                       width: 2,
                       color: Colors.black,
                     )),
-                    child: ListTile(
-                      title: Row(
+                    child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image.asset(Constants.transporterImg),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              CustomText(
-                                text: 'Transporter',
-                                bold: true,
+                          Radio<Gender>(
+                            value: Gender.male,
+                            groupValue: selectedGender,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedGender = value;
+                              });
+                            },
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset(Constants.transporterImg),
+                              const SizedBox(
+                                width: 20,
                               ),
-                              SizedBox(
-                                width: 200,
-                                child: CustomText(
-                                  text:
-                                      'Lorem ipsum dolor sit amet, consectetur adipiscing',
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  CustomText(
+                                    text: 'Transporter',
+                                    bold: true,
+                                    fontSize: 18,
+                                  ),
+                                  SizedBox(
+                                    width: 200,
+                                    child: CustomText(
+                                      fontSize: 14,
+                                      text:
+                                          'Lorem ipsum dolor sit amet, consectetur adipiscing',
+                                      textAlign: TextAlign.start,
+                                    ),
+                                  ),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                      leading: Radio<Gender>(
-                        value: Gender.female,
-                        groupValue: selectedGender,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedGender = value;
-                          });
-                        },
-                      ),
-                    ),
+                          ),
+                        ]),
                   ),
                 ),
               ],
