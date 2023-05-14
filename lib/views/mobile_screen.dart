@@ -94,7 +94,7 @@ class _MobileScreenState extends State<MobileScreen> {
             ),
             child: Container(
               // height: 100,
-              width: Constants.screenWidth(context) / 1.4,
+              width: Constants.screenWidth(context) / 1.2,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -113,6 +113,7 @@ class _MobileScreenState extends State<MobileScreen> {
                     ),
                     const CustomText(
                       text: '-',
+                      bold: true,
                     ),
                     SizedBox(
                       width: 170,
@@ -164,12 +165,14 @@ class _MobileScreenState extends State<MobileScreen> {
           Expanded(
             child: Container(),
           ),
-          // Image.asset(
-          //   Constants.page3Vector,
-          //   width:
-          //       Constants.screenWidth(context), // Replace with your image path
-          //   fit: BoxFit.cover, // Adjust the BoxFit based on your needs
-          // ),
+          Expanded(
+            child: Image.asset(
+              Constants.page3Vector,
+              width: Constants.screenWidth(
+                  context), // Replace with your image path
+              fit: BoxFit.cover, // Adjust the BoxFit based on your needs
+            ),
+          ),
         ],
       ),
     );

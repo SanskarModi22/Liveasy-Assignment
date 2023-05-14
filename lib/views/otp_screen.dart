@@ -124,8 +124,8 @@ class _OTPScreenState extends State<OTPScreen> {
             ),
             child: SizedBox(
               width: Constants.screenWidth(context) / 2,
-              child: const CustomText(
-                text: 'Code is sent to 7905709124',
+              child: CustomText(
+                text: 'Code is sent to ${widget.phoneNo}',
                 color: Constants.grey,
                 fontSize: 14,
               ),
@@ -165,7 +165,7 @@ class _OTPScreenState extends State<OTPScreen> {
               bottom: 20,
             ),
             child: SizedBox(
-                width: Constants.screenWidth(context) / 1.3,
+                width: Constants.screenWidth(context) / 1.2,
                 child: Center(
                   child: RichText(
                     text: const TextSpan(
@@ -199,7 +199,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 fontSize: 16,
               ), // Text style of the button's label
               padding: const EdgeInsets.symmetric(
-                horizontal: 100,
+                horizontal: 50,
                 vertical: 20,
               ), // Padding around the button's label
               shape: const RoundedRectangleBorder(
@@ -215,11 +215,13 @@ class _OTPScreenState extends State<OTPScreen> {
           Expanded(
             child: Container(),
           ),
-          Image.asset(
-            Constants.page3Vector,
-            width:
-                Constants.screenWidth(context), // Replace with your image path
-            fit: BoxFit.cover, // Adjust the BoxFit based on your needs
+          Expanded(
+            child: Image.asset(
+              Constants.page3Vector,
+              width: Constants.screenWidth(
+                  context), // Replace with your image path
+              fit: BoxFit.cover, // Adjust the BoxFit based on your needs
+            ),
           ),
         ],
       ),
