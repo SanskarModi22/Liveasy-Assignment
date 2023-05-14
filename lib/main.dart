@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:liveasy_assignment/views/profile_screen.dart';
+import 'package:liveasy_assignment/routes/router.dart';
+import 'package:routemaster/routemaster.dart';
 
 import 'firebase_options.dart';
 
@@ -18,13 +19,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Liveasy',
       theme: ThemeData(
         fontFamily: 'Roboto',
       ),
-      home: const ProfileScreen(),
+      routerDelegate: RoutemasterDelegate(routesBuilder: (_) => routes),
+      routeInformationParser: const RoutemasterParser(),
     );
   }
 }

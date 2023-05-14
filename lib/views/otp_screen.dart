@@ -1,20 +1,94 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:liveasy_assignment/views/home_screen.dart';
+import 'package:liveasy_assignment/views/profile_screen.dart';
+import 'package:logger/logger.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../constants/constants.dart';
 import '../widgets/custom_text.dart';
 
 class OTPScreen extends StatefulWidget {
-  const OTPScreen({super.key});
-
+  const OTPScreen({super.key, this.phoneNo});
+  final String? phoneNo;
   @override
   State<OTPScreen> createState() => _OTPScreenState();
 }
 
 class _OTPScreenState extends State<OTPScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _verifyPhone();
+  }
+
+  Logger log = Logger();
   OtpFieldController otpController = OtpFieldController();
+  String? otp;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String? _verificationCode;
+
+  _verifyPhone() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: '+91${widget.phoneNo}',
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((value) async {
+            if (value.user != null) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (route) => false);
+            }
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print(e.message);
+        },
+        codeSent: (String? verficationID, int? resendToken) {
+          setState(() {
+            _verificationCode = verficationID;
+          });
+        },
+        codeAutoRetrievalTimeout: (String verificationID) {
+          setState(() {
+            _verificationCode = verificationID;
+          });
+        },
+        timeout: const Duration(seconds: 120));
+  }
+
+  void navigateToProfileScreen(BuildContext context) {
+    Routemaster.of(context).push('/profileScreen');
+  }
+
+  Future<void> verifyOTPCode({String? otpText}) async {
+    // log.i(widget.receivedId);
+    try {
+      await FirebaseAuth.instance
+          .signInWithCredential(PhoneAuthProvider.credential(
+              verificationId: _verificationCode!, smsCode: otpText!))
+          .then(
+        (value) async {
+          if (value.user != null) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,10 +150,13 @@ class _OTPScreenState extends State<OTPScreen> {
                     backgroundColor: Constants.lightBlue,
                   ),
                   onChanged: (pin) {
-                    print("Changed: $pin");
+                    // print("Changed: $pin");
                   },
                   onCompleted: (pin) {
-                    print("Completed: $pin");
+                    setState(() {
+                      otp = pin;
+                      log.i(otp);
+                    });
                   }),
             ),
           ),
@@ -111,8 +188,9 @@ class _OTPScreenState extends State<OTPScreen> {
                 )),
           ),
           ElevatedButton(
-            onPressed: () {
-              // Handle button press
+            onPressed: () async {
+              await verifyOTPCode(otpText: otp);
+              log.d('Successfully Authenticated');
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,

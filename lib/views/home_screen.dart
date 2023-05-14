@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liveasy_assignment/widgets/custom_text.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../constants/constants.dart';
 import '../widgets/custom_dropdown.dart';
@@ -12,6 +13,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToMobileScreen(BuildContext context) {
+    Routemaster.of(context).push('/mobileScreen');
+  }
+
   final List<String> genderItems = [
     'English',
     'Hindi',
@@ -85,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Handle button press
+                navigateToMobileScreen(context);
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,

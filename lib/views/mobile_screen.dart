@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:liveasy_assignment/views/otp_screen.dart';
+import 'package:logger/logger.dart';
 
 import '../constants/constants.dart';
 import '../widgets/custom_text.dart';
@@ -11,7 +14,36 @@ class MobileScreen extends StatefulWidget {
 }
 
 class _MobileScreenState extends State<MobileScreen> {
+  // void navigateToOTPScreen(BuildContext context) {
+  //   Routemaster.of(context).push('/otp/$receivedId');
+  // }
   TextEditingController mobileController = TextEditingController();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  Logger log = Logger();
+  // Future<void> verifyUserPhoneNumber({
+  //   String? userNumber,
+  // }) async {
+  //   auth.verifyPhoneNumber(
+  //     phoneNumber: '+91$userNumber',
+  //     verificationCompleted: (PhoneAuthCredential credential) async {
+  //       await auth.signInWithCredential(credential).then(
+  //         (value) {
+  //           log.d(userNumber);
+  //         },
+  //       );
+  //     },
+  //     verificationFailed: (FirebaseAuthException e) {
+  //       log.e(e.message);
+  //     },
+  //     codeSent: (String verificationId, int? resendToken) {
+  //       setState(() {
+  //         receivedId = verificationId;
+  //       });
+  //     },
+  //     codeAutoRetrievalTimeout: (String verificationId) {},
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,8 +133,13 @@ class _MobileScreenState extends State<MobileScreen> {
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              // Handle button press
+            onPressed: () async {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      OTPScreen(phoneNo: mobileController.text),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
@@ -127,12 +164,12 @@ class _MobileScreenState extends State<MobileScreen> {
           Expanded(
             child: Container(),
           ),
-          Image.asset(
-            Constants.page3Vector,
-            width:
-                Constants.screenWidth(context), // Replace with your image path
-            fit: BoxFit.cover, // Adjust the BoxFit based on your needs
-          ),
+          // Image.asset(
+          //   Constants.page3Vector,
+          //   width:
+          //       Constants.screenWidth(context), // Replace with your image path
+          //   fit: BoxFit.cover, // Adjust the BoxFit based on your needs
+          // ),
         ],
       ),
     );
