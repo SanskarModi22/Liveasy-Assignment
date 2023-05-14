@@ -54,7 +54,9 @@ class _MobileScreenState extends State<MobileScreen> {
             size: 30,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
