@@ -47,7 +47,7 @@ class _OTPScreenState extends State<OTPScreen> {
           });
         },
         verificationFailed: (FirebaseAuthException e) {
-          print(e.message);
+          log.e(e.message);
         },
         codeSent: (String? verficationID, int? resendToken) {
           setState(() {
@@ -165,27 +165,36 @@ class _OTPScreenState extends State<OTPScreen> {
               bottom: 20,
             ),
             child: SizedBox(
-                width: Constants.screenWidth(context) / 1.2,
-                child: Center(
-                  child: RichText(
-                    text: const TextSpan(
-                      text: 'Didn\'t  receive the code? ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Request Again',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+              width: Constants.screenWidth(context) / 1.2,
+              child: Center(
+                  child: Row(
+                children: [
+                  const Text(
+                    'Didn\'t  receive the code? ',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
                     ),
                   ),
-                )),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const OTPScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Request Again',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              )),
+            ),
           ),
           ElevatedButton(
             onPressed: () async {
