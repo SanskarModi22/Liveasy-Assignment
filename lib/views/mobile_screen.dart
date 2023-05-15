@@ -138,6 +138,12 @@ class _MobileScreenState extends State<MobileScreen> {
           ElevatedButton(
             onPressed: () {
               if (mobileController.text != '') {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.blueAccent[400],
+                    content: const Text("Code has been Sent"),
+                  ),
+                );
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) =>
@@ -145,8 +151,11 @@ class _MobileScreenState extends State<MobileScreen> {
                   ),
                 );
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Please Write Mobile Number')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please Write Mobile Number'),
+                  ),
+                );
               }
             },
             style: ElevatedButton.styleFrom(

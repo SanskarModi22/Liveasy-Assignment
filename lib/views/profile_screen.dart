@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants/constants.dart';
 import '../widgets/custom_text.dart';
 
-enum Gender { male, female }
+enum Gender { shipper, transporter }
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Radio<Gender>(
-                            value: Gender.male,
+                            value: Gender.shipper,
                             groupValue: selectedGender,
                             onChanged: (value) {
                               setState(() {
@@ -104,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Radio<Gender>(
-                            value: Gender.male,
+                            value: Gender.transporter,
                             groupValue: selectedGender,
                             onChanged: (value) {
                               setState(() {

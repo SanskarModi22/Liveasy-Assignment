@@ -75,6 +75,12 @@ class _OTPScreenState extends State<OTPScreen> {
           .then(
         (value) async {
           if (value.user != null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                backgroundColor: Colors.greenAccent[400],
+                content: const Text("Successfully Authenticated"),
+              ),
+            );
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const ProfileScreen(),
